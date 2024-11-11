@@ -26,4 +26,5 @@ group :development, :test do
   gem 'faker'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'database_cleaner-active_record'
+  gem 'brakeman', require: false
 end

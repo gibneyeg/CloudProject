@@ -6,7 +6,10 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+/config/database.yml
+/config/master.key
+/config/credentials.yml.enc
+.env
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
