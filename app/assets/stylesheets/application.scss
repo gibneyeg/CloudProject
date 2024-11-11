@@ -1,0 +1,95 @@
+// Custom variables
+$primary: #4361ee;
+$success: #2ec4b6;
+$danger: #e63946;
+$light: #f8f9fa;
+$dark: #1b1b1b;
+
+// Import Bootstrap
+@import "bootstrap";
+
+// Global styles
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+// Container padding
+.container {
+  padding: 2rem;
+}
+
+// Card styles
+.book-card {
+  background: white;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Button styles
+.btn {
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  
+  &.btn-primary {
+    background: $primary;
+    border: none;
+    box-shadow: 0 4px 15px rgba($primary, 0.3);
+    
+    &:hover {
+      background: darken($primary, 5%);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Navigation
+.navbar {
+  background: white !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  padding: 1rem 0;
+  
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+  
+  .nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px;
+    
+    &:hover {
+      background: $light;
+    }
+    
+    &.active {
+      color: $primary !important;
+      background: rgba($primary, 0.1);
+    }
+  }
+}
+
+// Headers
+h1, h2, h3 {
+  font-weight: 700;
+  color: $dark;
+}
+
+// Badge styles
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+}

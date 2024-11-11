@@ -1,0 +1,64 @@
+<div class="card shadow">
+  <div class="card-header bg-primary text-white">
+    <h2 class="mb-0">My Borrowings</h2>
+  </div>
+  
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Book</th>
+            <th>Borrowed Date</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @borrowings.each do |borrowing| %>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div>
+                    <h6 class="mb-0"><%= link_to borrowing.book.title, book_path(borrowing.book), class: 'text-decoration-none' %></h6>
+                    <small class="text-muted"><%= borrowing.book.author %></small>
+                  </div>
+                </div>
+              </td>
+              <td><%= borrowing.created_at.strftime('%B %d, %Y') %></td>
+              <td>
+                <% days_until_due = (borrowing.due_date.to_date - Date.today).to_i %>
+                <% if days_until_due < 0 && !borrowing.returned_date %>
+                  <span class="text-danger">
+                    Overdue by <%= days_until_due.abs %> days
+                  </span>
+                <% else %>
+                  <%= borrowing.due_date.strftime('%B %d, %Y') %>
+                <% end %>
+              </td>
+              <td>
+                <% if borrowing.returned_date %>
+                  <span class="badge bg-success">Returned</span>
+                <% elsif borrowing.due_date < Date.today %>
+                  <span class="badge bg-danger">Overdue</span>
+                <% else %>
+                  <span class="badge bg-primary">Active</span>
+                <% end %>
+              </td>
+              <td>
+                <% if !borrowing.returned_date %>
+                  <%= button_to return_book_path(borrowing.book), 
+                      method: :post, 
+                      class: 'btn btn-outline-success btn-sm' do %>
+                    <i class="bi bi-arrow-return-left"></i> Return
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
