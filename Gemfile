@@ -24,7 +24,8 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'shoulda-matchers'
   gem 'capybara'
-  gem 'database_cleaner'
+  gem 'database_cleaner-active_record'
 end
