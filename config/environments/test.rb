@@ -50,4 +50,10 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+    # Add these lines
+    # Add these lines
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+    config.action_mailer.delivery_method = :test
+    config.cache_classes = false
+    config.action_view.cache_template_loading = true
 end

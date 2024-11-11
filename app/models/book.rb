@@ -1,12 +1,20 @@
 class Book < ApplicationRecord
   belongs_to :category
-  has_many :borrowings
+  has_many :borrowings, dependent: :destroy
   has_many :users, through: :borrowings
-  
+
   validates :title, presence: true
   validates :isbn, presence: true, uniqueness: true
   validates :author, presence: true
-  
+
   scope :available, -> { where(available: true) }
   scope :borrowed, -> { where(available: false) }
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title author isbn available]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[category]
+  end
 end

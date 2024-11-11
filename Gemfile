@@ -8,7 +8,6 @@ gem 'bootsnap'
 gem 'devise'
 gem 'pundit'
 gem 'pagy'
-gem 'faker'
 gem 'ransack'
 gem 'bootstrap', '~> 5.3'
 gem 'sassc-rails'  # Add this line
@@ -25,7 +24,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'shoulda-matchers'
-  gem 'capybara'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'database_cleaner-active_record'
 end

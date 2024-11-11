@@ -1,32 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe "Categories", type: :request do
-  describe "GET /index" do
-    it "returns http success" do
-      get "/categories/index"
+  describe "as an authenticated user" do
+    let(:user) { create(:user) }
+    let(:category) { create(:category) }
+
+    before do
+      # Make sure category is created before signing in
+      category
+      sign_in user
+    end
+
+    it "shows the index page" do
+      get categories_path
+      expect(response).to have_http_status(:success)
+    end
+
+    it "shows a category" do
+      get category_path(category)
+      expect(response).to have_http_status(:success)
+    end
+
+    it "shows the new category form" do
+      get new_category_path
+      expect(response).to have_http_status(:success)
+    end
+
+    it "shows the edit category form" do
+      get edit_category_path(category)
       expect(response).to have_http_status(:success)
     end
   end
-
-  describe "GET /show" do
-    it "returns http success" do
-      get "/categories/show"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /new" do
-    it "returns http success" do
-      get "/categories/new"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /edit" do
-    it "returns http success" do
-      get "/categories/edit"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end

@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Borrowing, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    subject { build(:borrowing) }
+    
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:book) }
+  end
+
+  describe 'validations' do
+    subject { build(:borrowing) }
+    
+    it { is_expected.to validate_presence_of(:due_date) }
+  end
 end
