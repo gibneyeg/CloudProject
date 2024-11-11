@@ -8,7 +8,8 @@ class Borrowing < ApplicationRecord
   private
 
   def book_must_be_available
-    return unless book&.respond_to?(:available?)
+    return unless book.respond_to?(:available?)
+
     errors.add(:book, 'is not available') unless book.available?
   end
 end

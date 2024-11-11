@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Borrowings", type: :request do
-  describe "as an authenticated user" do
+RSpec.describe 'Borrowings' do
+  describe 'as an authenticated user' do
     let(:user) { create(:user) }
     let(:category) { create(:category) }
     let(:book) { create(:book, category: category) }
@@ -15,17 +15,17 @@ RSpec.describe "Borrowings", type: :request do
       sign_in user
     end
 
-    it "shows the index page" do
+    it 'shows the index page' do
       get borrowings_path
       expect(response).to have_http_status(:success)
     end
 
-    it "shows a borrowing" do
+    it 'shows a borrowing' do
       get borrowing_path(borrowing)
       expect(response).to have_http_status(:success)
     end
 
-    it "shows the new borrowing form" do
+    it 'shows the new borrowing form' do
       get new_borrowing_path
       expect(response).to have_http_status(:success)
     end

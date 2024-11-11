@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Categories", type: :request do
-  describe "as an authenticated user" do
+RSpec.describe 'Categories' do
+  describe 'as an authenticated user' do
     let(:user) { create(:user) }
     let(:category) { create(:category) }
 
@@ -11,22 +11,22 @@ RSpec.describe "Categories", type: :request do
       sign_in user
     end
 
-    it "shows the index page" do
+    it 'shows the index page' do
       get categories_path
       expect(response).to have_http_status(:success)
     end
 
-    it "shows a category" do
+    it 'shows a category' do
       get category_path(category)
       expect(response).to have_http_status(:success)
     end
 
-    it "shows the new category form" do
+    it 'shows the new category form' do
       get new_category_path
       expect(response).to have_http_status(:success)
     end
 
-    it "shows the edit category form" do
+    it 'shows the edit category form' do
       get edit_category_path(category)
       expect(response).to have_http_status(:success)
     end

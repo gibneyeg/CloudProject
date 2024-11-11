@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Books", type: :request do
+RSpec.describe 'Books' do
   let(:user) { create(:user) }
   let(:category) { create(:category) }
   let(:book) { create(:book, category: category) }
@@ -13,34 +13,34 @@ RSpec.describe "Books", type: :request do
     Warden.test_reset!
   end
 
-  describe "GET actions" do
-    it "shows the index page" do
+  describe 'GET actions' do
+    it 'shows the index page' do
       get books_path
       expect(response).to have_http_status(:success)
     end
 
-    it "shows a book" do
+    it 'shows a book' do
       get book_path(book)
       expect(response).to have_http_status(:success)
       expect(response.body).to include(book.title)
     end
 
-    it "shows the new book form" do
+    it 'shows the new book form' do
       get new_book_path
       expect(response).to have_http_status(:success)
     end
 
-    it "shows the edit book form" do
+    it 'shows the edit book form' do
       get edit_book_path(book)
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "POST actions" do
+  describe 'POST actions' do
     let(:valid_attributes) { attributes_for(:book, category_id: category.id) }
 
-    context "with valid parameters" do
-      it "creates a new book" do
+    context 'with valid parameters' do
+      it 'creates a new book' do
         expect {
           post books_path, params: { book: valid_attributes }
         }.to change(Book, :count).by(1)
@@ -48,38 +48,38 @@ RSpec.describe "Books", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new book" do
+    context 'with invalid parameters' do
+      it 'does not create a new book' do
         expect {
-          post books_path, params: { book: { title: "" } }
+          post books_path, params: { book: { title: '' } }
         }.not_to change(Book, :count)
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
-  describe "PUT actions" do
-    let(:new_attributes) { { title: "Updated Title" } }
+  describe 'PUT actions' do
+    let(:new_attributes) { { title: 'Updated Title' } }
 
-    context "with valid parameters" do
-      it "updates the book" do
+    context 'with valid parameters' do
+      it 'updates the book' do
         put book_path(book), params: { book: new_attributes }
         book.reload
-        expect(book.title).to eq("Updated Title")
+        expect(book.title).to eq('Updated Title')
         expect(response).to redirect_to(book_path(book))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not update the book" do
-        put book_path(book), params: { book: { title: "" } }
+    context 'with invalid parameters' do
+      it 'does not update the book' do
+        put book_path(book), params: { book: { title: '' } }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
-  describe "DELETE actions" do
-    it "deletes the book" do
+  describe 'DELETE actions' do
+    it 'deletes the book' do
       book_to_delete = create(:book, category: category)
       expect {
         delete book_path(book_to_delete)
@@ -88,17 +88,17 @@ RSpec.describe "Books", type: :request do
     end
   end
 
-  describe "search and filter" do
-    let!(:ruby_book) { create(:book, title: "Ruby Programming", category: category) }
-    let!(:python_book) { create(:book, title: "Python Basics", category: category) }
+  describe 'search and filter' do
+    let!(:ruby_book) { create(:book, title: 'Ruby Programming', category: category) }
+    let!(:python_book) { create(:book, title: 'Python Basics', category: category) }
 
-    it "filters books by title" do
-      get books_path, params: { q: { title_cont: "Ruby" } }
-      expect(response.body).to include("Ruby Programming")
-      expect(response.body).not_to include("Python Basics")
+    it 'filters books by title' do
+      get books_path, params: { q: { title_cont: 'Ruby' } }
+      expect(response.body).to include('Ruby Programming')
+      expect(response.body).not_to include('Python Basics')
     end
 
-    it "filters books by availability" do
+    it 'filters books by availability' do
       ruby_book.update(available: false)
       get books_path, params: { q: { available_eq: true } }
       expect(response.body).to include(python_book.title)
@@ -106,8 +106,8 @@ RSpec.describe "Books", type: :request do
     end
   end
 
-  describe "error handling" do
-    it "handles record not found" do
+  describe 'error handling' do
+    it 'handles record not found' do
       get book_path(0)
       expect(flash[:alert]).to be_present
       expect(response).to redirect_to(books_path)

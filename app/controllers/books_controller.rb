@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :borrow, :return]
+  before_action :set_book, only: %i[show edit update destroy borrow return]
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
@@ -8,12 +8,13 @@ class BooksController < ApplicationController
     @books = @q.result(distinct: true)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @book = Book.new
   end
+
+  def edit; end
 
   def create
     @book = Book.new(book_params)
@@ -22,9 +23,6 @@ class BooksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update

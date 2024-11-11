@@ -1,10 +1,10 @@
 # spec/models/book_spec.rb
 require 'rails_helper'
 
-RSpec.describe Book, type: :model do
-  describe 'associations' do  # Changed from 'validations' to 'associations'
+RSpec.describe Book do
+  describe 'associations' do # Changed from 'validations' to 'associations'
     subject { build(:book) }
-    
+
     it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:borrowings) }
     it { is_expected.to have_many(:users).through(:borrowings) }
@@ -12,17 +12,19 @@ RSpec.describe Book, type: :model do
 
   describe 'validations' do
     # Create a category first since book requires it
-    let(:category) { create(:category) }
     # Build book with category for uniqueness validation
     subject { build(:book, category: category) }
-    
+
+    let(:category) { create(:category) }
+
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:isbn) }
     it { is_expected.to validate_presence_of(:author) }
-    
+
     describe 'isbn uniqueness' do
       # Create a book first for uniqueness validation
       before { create(:book, category: category) }
+
       it { is_expected.to validate_uniqueness_of(:isbn) }
     end
   end
@@ -30,7 +32,7 @@ RSpec.describe Book, type: :model do
   # Add some additional test cases
   describe 'scopes and methods' do
     let(:category) { create(:category) }
-    
+
     describe '.available' do
       let!(:available_book) { create(:book, category: category, available: true) }
       let!(:borrowed_book) { create(:book, category: category, available: false) }

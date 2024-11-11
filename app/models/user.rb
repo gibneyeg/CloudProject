@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :books, through: :borrowings
 
   # Enums
-  enum :role, [:patron, :librarian, :admin], default: :patron
+  enum :role, { patron: 0, librarian: 1, admin: 2 }, default: :patron
 end

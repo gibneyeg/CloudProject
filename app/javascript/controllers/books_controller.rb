@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: %i[show edit update destroy]
   before_action :authenticate_user!
 
   def index
@@ -7,8 +7,7 @@ class BooksController < ApplicationController
     @pagy, @books = pagy(@q.result(distinct: true))
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @book = Book.new
