@@ -1,7 +1,7 @@
+# spec/support/devise.rb
 RSpec.configure do |config|
+  config.include Devise::Test::IntegrationHelpers
   config.include Warden::Test::Helpers
-  config.include Devise::Test::IntegrationHelpers, type: :request
-  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.before :suite do
     Warden.test_mode!
