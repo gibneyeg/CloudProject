@@ -6,7 +6,6 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-/config/database.yml
 /config/master.key
 /config/credentials.yml.enc
 .env
@@ -20,7 +19,7 @@
 /config/master.key
 
 # Ignore database config
-/config/database.yml
+#/config/database.yml
 
 # Ignore environment variables
 .env

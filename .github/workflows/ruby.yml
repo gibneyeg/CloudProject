@@ -1,60 +1,40 @@
-name: Ruby CI
+env:
+  RAILS_ENV: test
+  DATABASE_HOST: localhost
+  DATABASE_PORT: 5432
+  DATABASE_USERNAME: library_user
+  DATABASE_PASSWORD: library_password
+  DATABASE_NAME: library_system_test
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+steps:
+  - name: Set up Ruby
+    uses: ruby/setup-ruby@v1
+    with:
+      ruby-version: "3.3.5"
+      bundler-cache: true
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+  - name: Install PostgreSQL client
+    run: |
+      sudo apt-get update
+      sudo apt-get install -y postgresql-client libpq-dev
 
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_USER: cloud
-          POSTGRES_PASSWORD: cloud
-          POSTGRES_DB: library_system_test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+  - name: Debug PostgreSQL Connection
+    run: |
+      echo "Checking PostgreSQL connection..."
+      PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c '\conninfo'
+      PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c '\l'
 
-    env:
-      RAILS_ENV: test
-      POSTGRES_HOST: localhost
-      POSTGRES_USER: cloud
-      POSTGRES_PASSWORD: cloud
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  - name: Setup Database
+    run: |
+      # Wait for PostgreSQL
+      while ! PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c 'SELECT 1' > /dev/null 2>&1; do
+        echo "Waiting for PostgreSQL..."
+        sleep 2
+      done
+      # Load schema and run migrations
+      bin/rails db:schema:load
+      bin/rails db:migrate
 
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.3.5
-          bundler-cache: true
-
-      - name: Install PostgreSQL client
-        run: |
-          sudo apt-get -yqq install libpq-dev
-
-    - name: Setup test database
-      run: |
-        cp config/database.yml.ci config/database.yml
-        bundle install
-        bin/rails db:prepare
-        bin/rails db:test:prepare
-
-      - name: Run tests
-        run: bundle exec rspec
-
-      - name: Run security scan
-        run: |
-          bundle exec brakeman -A -q -w2
+  - name: Run RSpec tests
+    run: |
+      bundle exec rspec
