@@ -45,10 +45,12 @@ jobs:
         run: |
           sudo apt-get -yqq install libpq-dev
 
-      - name: Setup test database
-        run: |
-          bundle install
-          bundle exec rails db:test:prepare
+    - name: Setup test database
+      run: |
+        cp config/database.yml.ci config/database.yml
+        bundle install
+        bin/rails db:prepare
+        bin/rails db:test:prepare
 
       - name: Run tests
         run: bundle exec rspec

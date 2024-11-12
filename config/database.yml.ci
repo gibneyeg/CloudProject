@@ -1,9 +1,9 @@
 test:
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
-  port: <%= ENV.fetch("POSTGRES_PORT") { 5432 } %>
-  username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "postgres" } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
   database: library_system_test
-  pool: 5
