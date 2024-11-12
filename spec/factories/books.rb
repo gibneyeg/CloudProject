@@ -5,6 +5,6 @@ FactoryBot.define do
     author { 'Author Name' }
     description { 'Book description' }
     available { true }
-    association :category
+    category
   end
 end

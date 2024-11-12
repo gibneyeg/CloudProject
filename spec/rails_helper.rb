@@ -8,7 +8,7 @@ require 'rspec/rails'
 require 'devise'
 require 'database_cleaner/active_record'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Rails.root.glob('spec/support/**/*.rb').each { |f| require f }
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
