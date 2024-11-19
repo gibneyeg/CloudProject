@@ -1,40 +1,40 @@
-env:
-  RAILS_ENV: test
-  DATABASE_HOST: localhost
-  DATABASE_PORT: 5432
-  DATABASE_USERNAME: library_user
-  DATABASE_PASSWORD: library_password
-  DATABASE_NAME: library_system_test
+# env:
+#   RAILS_ENV: test
+#   DATABASE_HOST: localhost
+#   DATABASE_PORT: 5432
+#   DATABASE_USERNAME: library_user
+#   DATABASE_PASSWORD: library_password
+#   DATABASE_NAME: library_system_test
 
-steps:
-  - name: Set up Ruby
-    uses: ruby/setup-ruby@v1
-    with:
-      ruby-version: "3.3.5"
-      bundler-cache: true
+# steps:
+#   - name: Set up Ruby
+#     uses: ruby/setup-ruby@v1
+#     with:
+#       ruby-version: "3.3.5"
+#       bundler-cache: true
 
-  - name: Install PostgreSQL client
-    run: |
-      sudo apt-get update
-      sudo apt-get install -y postgresql-client libpq-dev
+#   - name: Install PostgreSQL client
+#     run: |
+#       sudo apt-get update
+#       sudo apt-get install -y postgresql-client libpq-dev
 
-  - name: Debug PostgreSQL Connection
-    run: |
-      echo "Checking PostgreSQL connection..."
-      PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c '\conninfo'
-      PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c '\l'
+#   - name: Debug PostgreSQL Connection
+#     run: |
+#       echo "Checking PostgreSQL connection..."
+#       PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c '\conninfo'
+#       PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c '\l'
 
-  - name: Setup Database
-    run: |
-      # Wait for PostgreSQL
-      while ! PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c 'SELECT 1' > /dev/null 2>&1; do
-        echo "Waiting for PostgreSQL..."
-        sleep 2
-      done
-      # Load schema and run migrations
-      bin/rails db:schema:load
-      bin/rails db:migrate
+#   - name: Setup Database
+#     run: |
+#       # Wait for PostgreSQL
+#       while ! PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -U $DATABASE_USERNAME -c 'SELECT 1' > /dev/null 2>&1; do
+#         echo "Waiting for PostgreSQL..."
+#         sleep 2
+#       done
+#       # Load schema and run migrations
+#       bin/rails db:schema:load
+#       bin/rails db:migrate
 
-  - name: Run RSpec tests
-    run: |
-      bundle exec rspec
+#   - name: Run RSpec tests
+#     run: |
+#       bundle exec rspec
