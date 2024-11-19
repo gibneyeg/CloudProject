@@ -1,11 +1,12 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_book, only: %i[show edit update destroy borrow return]
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
     @q = Book.ransack(params[:q])
-    @books = @q.result(distinct: true)
+    @pagy, @books = pagy(@q.result(distinct: true))
   end
 
   def show; end

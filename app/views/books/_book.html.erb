@@ -1,0 +1,22 @@
+<tr>
+  <td><%= book.title %></td>
+  <td><%= book.author %></td>
+  <td><%= book.category&.name %></td>
+  <td>
+    <span class="badge <%= book.available? ? 'bg-success' : 'bg-danger' %>">
+      <%= book.available? ? 'Available' : 'Borrowed' %>
+    </span>
+  </td>
+  <td>
+    <%= link_to book_path(book), class: "btn btn-sm btn-outline-primary me-2" do %>
+      <i class="bi bi-eye"></i>
+    <% end %>
+    <%= link_to edit_book_path(book), class: "btn btn-sm btn-outline-secondary me-2" do %>
+      <i class="bi bi-pencil"></i>
+    <% end %>
+    <%= button_to book_path(book), method: :delete, class: "btn btn-sm btn-outline-danger",
+        form: { data: { turbo_confirm: 'Are you sure?' } }, style: "display: inline-block;" do %>
+      <i class="bi bi-trash"></i>
+    <% end %>
+  </td>
+</tr>

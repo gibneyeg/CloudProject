@@ -1,5 +1,6 @@
 class BorrowingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index
     @borrowings = if current_user.admin?

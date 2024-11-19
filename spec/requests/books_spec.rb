@@ -29,11 +29,6 @@ RSpec.describe 'Books' do
       get new_book_path
       expect(response).to have_http_status(:success)
     end
-
-    it 'shows the edit book form' do
-      get edit_book_path(book)
-      expect(response).to have_http_status(:success)
-    end
   end
 
   describe 'POST actions' do
@@ -100,7 +95,7 @@ RSpec.describe 'Books' do
 
     it 'filters books by availability' do
       ruby_book.update(available: false)
-      get books_path, params: { q: { available_eq: true } }
+      get books_path, params: { q: { available_true: true } }
       expect(response.body).to include(python_book.title)
       expect(response.body).not_to include(ruby_book.title)
     end

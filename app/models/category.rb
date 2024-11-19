@@ -17,4 +17,8 @@ class Category < ApplicationRecord
   def total_books
     books.count
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[created_at id name updated_at]
+  end
 end

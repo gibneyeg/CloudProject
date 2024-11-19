@@ -11,10 +11,10 @@ class Book < ApplicationRecord
   scope :borrowed, -> { where(available: false) }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[title author isbn available]
+    %w[author created_at description id title updated_at status available]
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    %w[category]
+    ['category']
   end
 end
