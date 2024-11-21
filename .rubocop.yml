@@ -79,3 +79,19 @@ RSpec/ContextWording:
     - with
     - without
     - as
+
+
+Layout/EmptyLines:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false

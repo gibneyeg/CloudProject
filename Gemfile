@@ -37,7 +37,7 @@ group :development, :test do
   gem 'shoulda-matchers'
 end
 
-platforms :mingw, :mswin, :x64_mingw, :jruby do
-  gem 'tzinfo-data'
-  gem 'windows-pr'
-end
+# platforms :mingw, :mswin, :x64_mingw, :jruby do
+#   gem 'tzinfo-data'
+#   gem 'windows-pr'
+# end
