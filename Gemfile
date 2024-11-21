@@ -8,7 +8,7 @@ gem 'devise'
 gem 'ostruct'      # Add this to remove the warning
 gem 'pagy'
 gem 'pg'
-gem 'psych', '~> 4.0.6'
+gem 'psych', '~> 5.2.0'
 gem 'puma'
 gem 'pundit'
 gem 'rails', '~> 8.0'
