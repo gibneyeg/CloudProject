@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 ruby '3.3.5'
 
+
 gem 'bootsnap'
 gem 'bootstrap', '~> 5.3'
 gem 'devise'
 gem 'ostruct'      # Add this to remove the warning
 gem 'pagy'
 gem 'pg'
+gem 'psych', '~> 4.0.6'
 gem 'puma'
 gem 'pundit'
 gem 'rails', '~> 8.0'
@@ -33,4 +35,9 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
   gem 'rubocop-rspec_rails', require: false
   gem 'shoulda-matchers'
+end
+
+platforms :mingw, :mswin, :x64_mingw, :jruby do
+  gem 'tzinfo-data'
+  gem 'windows-pr'
 end

@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[show edit update destroy]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @q = Book.ransack(params[:q])
@@ -13,6 +13,4 @@ class BooksController < ApplicationController
     @book = Book.new
     authorize @book
   end
-
-  # ... (rest of the controller actions)
 end

@@ -15,4 +15,10 @@ Devise.setup do |config|
 
   # Add this line
   config.navigational_formats = ['*/*', :html, :turbo_stream]
+
+
+
+  config.authentication_keys = [:email]
+  config.case_insensitive_keys = [:email]
+  config.strip_whitespace_keys = [:email]
 end
