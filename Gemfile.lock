@@ -328,6 +328,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2024.2)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.6.0)
     uri (1.0.1)
     useragent (0.16.10)
@@ -336,6 +338,12 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    win32-api (1.10.1-universal-mingw32)
+    windows-api (0.4.5)
+      win32-api (>= 1.4.5)
+    windows-pr (1.2.6)
+      win32-api (>= 1.4.5)
+      windows-api (>= 0.4.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.1)
@@ -379,6 +387,8 @@ DEPENDENCIES
   simple_form
   stimulus-rails
   turbo-rails
+  tzinfo-data
+  windows-pr
 
 RUBY VERSION
    ruby 3.3.5p100
