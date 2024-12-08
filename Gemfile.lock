@@ -199,7 +199,7 @@ GEM
     psych (4.0.6)
       stringio
     public_suffix (6.0.1)
-    puma (6.4.3)
+    puma (6.5.0)
       nio4r (~> 2.0)
     pundit (2.4.0)
       activesupport (>= 3.0.0)
@@ -338,6 +338,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    win32-api (1.10.1)
     win32-api (1.10.1-universal-mingw32)
     windows-api (0.4.5)
       win32-api (>= 1.4.5)
