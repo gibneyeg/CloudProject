@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   # Enums
   enum :role, { patron: 0, librarian: 1, admin: 2 }, default: :patron
+
 end

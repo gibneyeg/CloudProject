@@ -4,28 +4,42 @@
       <div class="card shadow-sm p-4 mt-5">
         <h2 class="text-center mb-4">Sign up</h2>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+          <div id="error_messages">
+            <% if resource.errors.any? %>
+              <div class="alert alert-danger alert-dismissible fade show">
+                <h4>
+                  <%= pluralize(resource.errors.count, "error") %> prohibited you from signing up:
+                </h4>
+                <ul>
+                  <% resource.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            <% end %>
+          </div>
 
           <div class="mb-3">
             <%= f.label :email, class: "form-label" %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+            <%= f.email_field :email, autofocus: true, class: "form-control" %>
           </div>
 
           <div class="mb-3">
             <%= f.label :password, class: "form-label" %>
+            <%= f.password_field :password, class: "form-control" %>
             <% if @minimum_password_length %>
-            <small class="text-muted">(<%= @minimum_password_length %> characters minimum)</small>
+              <small class="text-muted">(<%= @minimum_password_length %> characters minimum)</small>
             <% end %>
-            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
           </div>
 
           <div class="mb-3">
             <%= f.label :password_confirmation, class: "form-label" %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+            <%= f.password_field :password_confirmation, class: "form-control" %>
           </div>
 
-          <div class="d-grid gap-2">
+          <div class="d-grid">
             <%= f.submit "Sign up", class: "btn btn-primary btn-lg" %>
           </div>
         <% end %>

@@ -1,4 +1,3 @@
-# spec/models/book_spec.rb
 require 'rails_helper'
 
 RSpec.describe Book do

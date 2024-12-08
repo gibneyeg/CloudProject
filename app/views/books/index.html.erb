@@ -9,18 +9,21 @@
       </div>
     </div>
   </div>
+<%= search_form_for @q, class: "mb-4" do |f| %>
+  <div class="d-flex gap-3 align-items-center">
+    <%= f.search_field :title_or_author_cont, 
+        class: "form-control",
+        placeholder: "Search by title or author..." %>
+    
+    <%= f.collection_select :category_id_eq,
+        Category.all, :id, :name,
+        { include_blank: "All Categories" },
+        { class: "form-select", style: "max-width: 200px;" } %>
 
-  <%= search_form_for @q, class: "mb-4" do |f| %>
-    <div class="input-group">
-      <%= f.search_field :title_or_author_or_category_name_cont, 
-          class: "form-control",
-          placeholder: "Search books by title, author, or category..." %>
-      <div class="input-group-append">
-        <%= f.submit "Search", class: "btn btn-primary ms-2" %>
-        <%= link_to "Reset", books_path, class: "btn btn-secondary ms-2" %>
-      </div>
-    </div>
-  <% end %>
+    <%= f.submit "Search", class: "btn btn-primary" %>
+    <%= link_to "Reset", books_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>
 
   <div class="row">
     <% @books.each do |book| %>
