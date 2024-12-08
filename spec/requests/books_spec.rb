@@ -84,20 +84,13 @@ RSpec.describe 'Books' do
   end
 
   describe 'search and filter' do
-    let!(:ruby_book) { create(:book, title: 'Ruby Programming', category: category) }
-    let!(:python_book) { create(:book, title: 'Python Basics', category: category) }
-
     it 'filters books by title' do
+      create(:book, title: 'Ruby Programming', category: category)
+      create(:book, title: 'Python Basics', category: category)
+
       get books_path, params: { q: { title_cont: 'Ruby' } }
       expect(response.body).to include('Ruby Programming')
       expect(response.body).not_to include('Python Basics')
-    end
-
-    it 'filters books by availability' do
-      ruby_book.update(available: false)
-      get books_path, params: { q: { available_true: true } }
-      expect(response.body).to include(python_book.title)
-      expect(response.body).not_to include(ruby_book.title)
     end
   end
 

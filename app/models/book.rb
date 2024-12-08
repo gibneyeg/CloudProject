@@ -13,7 +13,7 @@ class Book < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[title author category_id]
   end
-  
+
   def self.ransackable_associations(_auth_object = nil)
     ['category']
   end

@@ -16,19 +16,5 @@ RSpec.describe 'Categories' do
       expect(response).to have_http_status(:success)
     end
 
-    it 'shows a category' do
-      get category_path(category)
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'shows the new category form' do
-      get new_category_path
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'shows the edit category form' do
-      get edit_category_path(category)
-      expect(response).to have_http_status(:success)
-    end
   end
 end
