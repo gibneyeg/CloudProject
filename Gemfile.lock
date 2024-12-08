@@ -196,7 +196,8 @@ GEM
     pg (1.5.9)
     pg (1.5.9-x64-mingw-ucrt)
     popper_js (2.11.8)
-    psych (4.0.6)
+    psych (5.2.1)
+      date
       stringio
     public_suffix (6.0.1)
     puma (6.4.3)
@@ -374,7 +375,7 @@ DEPENDENCIES
   ostruct
   pagy
   pg
-  psych (~> 4.0.6)
+  psych (~> 5.2.1)
   puma
   pundit
   rails (~> 8.0)
