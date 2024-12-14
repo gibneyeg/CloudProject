@@ -16,6 +16,7 @@ gem 'ransack'
 gem 'sassc-rails'
 gem 'simple_form'
 
+gem 'dotenv-rails'
 gem 'importmap-rails'
 gem 'jquery-rails'
 gem 'stimulus-rails'

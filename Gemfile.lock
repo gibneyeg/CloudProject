@@ -113,6 +113,10 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
+    dotenv (3.1.6)
+    dotenv-rails (3.1.6)
+      dotenv (= 3.1.6)
+      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
     execjs (2.10.0)
@@ -368,6 +372,7 @@ DEPENDENCIES
   capybara
   database_cleaner-active_record
   devise
+  dotenv-rails
   factory_bot_rails
   faker
   importmap-rails
@@ -395,7 +400,7 @@ DEPENDENCIES
   windows-pr
 
 RUBY VERSION
-   ruby 3.3.5p100
+   ruby 3.3.6p108
 
 BUNDLED WITH
    2.5.21
