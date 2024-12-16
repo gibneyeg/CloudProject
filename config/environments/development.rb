@@ -79,8 +79,7 @@ config.action_mailer.smtp_settings = {
   port: 587,
   domain: 'gmail.com',
   user_name: ENV['GMAIL_USERNAME'],
-  password: ENV['GMAIL_PASSWORD'],
-  authentication: 'plain',
+  password: ENV['GOOGLE_CLIENT_SECRET'], 
   enable_starttls_auto: true
 }
 end
