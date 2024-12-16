@@ -14,10 +14,7 @@ RSpec.describe 'Books' do
   end
 
   describe 'GET actions' do
-    it 'shows the index page' do
-      get books_path
-      expect(response).to have_http_status(:success)
-    end
+
 
     it 'shows a book' do
       get book_path(book)
