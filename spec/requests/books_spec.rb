@@ -15,7 +15,6 @@ RSpec.describe 'Books' do
 
   describe 'GET actions' do
 
-
     it 'shows a book' do
       get book_path(book)
       expect(response).to have_http_status(:success)
