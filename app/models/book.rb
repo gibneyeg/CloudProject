@@ -15,6 +15,5 @@ class Book < ApplicationRecord
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    ['category']
-  end
+    ['category'] end
 end

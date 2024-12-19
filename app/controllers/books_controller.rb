@@ -1,7 +1,8 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show] # Add this line
+  before_action :authenticate_user!, except: %i[index show]
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_book, only: %i[show edit update destroy borrow return]
+  before_action :check_admin, only: %i[destroy new create]
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
@@ -60,6 +61,12 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def check_admin
+    return if current_user.email == 'admin@library.com'
+    flash[:alert] = 'Only admin can delete books'
+    redirect_to books_path and return
+  end
 
   def set_book
     @book = Book.find(params[:id])

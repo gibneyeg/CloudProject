@@ -34,7 +34,7 @@
             <%= link_to 'Back to Books', books_path, class: 'btn btn-outline-secondary' %>
           </div>
           
-          <% if @book.available? && user_signed_in? %>
+          <% if @book.available? %>
             <%= button_to borrow_book_path(@book), method: :post, class: 'btn btn-success' do %>
               <i class="bi bi-bookmark-plus"></i> Borrow Book
             <% end %>

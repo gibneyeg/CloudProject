@@ -11,7 +11,7 @@ admin = User.create!(
   password: 'password123',
   role: :admin
 )
-puts 'Admin user created!'
+puts 'Admin user created'
 
 # Create categories
 puts 'Creating categories...'

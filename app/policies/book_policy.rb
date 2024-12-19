@@ -16,6 +16,6 @@ class BookPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    user&.role == 2
   end
 end
