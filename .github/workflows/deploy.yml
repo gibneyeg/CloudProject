@@ -1,0 +1,39 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3.6'
+        bundler-cache: true
+    
+    - name: Create SSH directory
+      run: mkdir -p ~/.ssh/
+      
+    - name: Deploy to EC2
+      env:
+        EC2_IP: '54.87.57.242'
+        PEM: ${{ secrets.EC2_PEM }}
+      run: |
+        echo "$PEM" > ~/.ssh/key.pem
+        chmod 600 ~/.ssh/key.pem
+        echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        ssh -i ~/.ssh/key.pem ubuntu@$EC2_IP '
+          cd ~/CloudProject
+          git pull origin main
+          bundle install
+          RAILS_ENV=production rails assets:precompile
+          RAILS_ENV=production rails db:migrate
+          kill -9 $(cat tmp/pids/server.pid) || true
+          RAILS_ENV=production SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} rails s -b 0.0.0.0 -p 3000 -d
+        '
