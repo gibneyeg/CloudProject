@@ -1,26 +1,21 @@
-// Custom variables
 $primary: #4361ee;
 $success: #2ec4b6;
 $danger: #e63946;
 $light: #f8f9fa;
 $dark: #1b1b1b;
 
-// Import Bootstrap
 @import "bootstrap";
 
-// Global styles
 body {
   font-family: 'Inter', sans-serif;
   background-color: #f8f9fa;
   min-height: 100vh;
 }
 
-// Container padding
 .container {
   padding: 2rem;
 }
 
-// Card styles
 .book-card {
   background: white;
   border-radius: 15px;
