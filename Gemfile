@@ -21,12 +21,12 @@ gem 'jquery-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 
+gem 'faker'
 group :development, :test do
   gem 'brakeman', require: false
   gem 'capybara'
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false

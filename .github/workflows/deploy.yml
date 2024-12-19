@@ -22,7 +22,7 @@ jobs:
       
     - name: Deploy to EC2
       env:
-        EC2_IP: '54.87.57.242'
+        EC2_IP: '54.234.183.235'
         PEM: ${{ secrets.EC2_PEM }}
       run: |
         echo "$PEM" > ~/.ssh/key.pem

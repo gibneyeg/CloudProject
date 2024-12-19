@@ -3,6 +3,24 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               '54.234.183.235',
+  user_name:            'gibney.eg@gmail.com', 
+  password:             'nzzm qbwv vbaz hdyb',      
+  authentication:       'plain',
+  enable_starttls_auto: true
+}
+config.action_mailer.default_url_options = { host: '54.234.183.235', port: 3000 }
+
+config.public_file_server.enabled = true
+config.assets.compile = true
+config.serve_static_assets = true
+config.consider_all_requests_local = true  
+
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
@@ -25,11 +43,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  config.assume_ssl = true
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
-
+  
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
@@ -47,13 +61,10 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Replace the default in-process memory cache store with a durable alternative.
-  config.cache_store = :solid_cache_store
+  config.cache_store = :memory_store
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
-  config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
-
-
+ 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
@@ -68,7 +79,11 @@ Rails.application.configure do
   #   address: "smtp.example.com",
   #   port: 587,
   #   authentication: :plain
-  # }
+config.force_ssl = false
+config.ssl_options = { hsts: false }
+config.action_controller.default_url_options = { protocol: 'http' }
+config.action_mailer.default_url_options = { protocol: 'http', host: '54.234.183.235' }
+config.hosts << "54.234.183.235"  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
