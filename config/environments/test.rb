@@ -29,7 +29,6 @@ Rails.application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
-
   config.cache_classes = false
   config.action_view.cache_template_loading = true
 end
