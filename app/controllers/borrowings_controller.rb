@@ -1,5 +1,5 @@
 class BorrowingsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!#user needs to be logged in to view
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index

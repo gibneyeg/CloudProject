@@ -6,6 +6,7 @@ RSpec.describe 'Books' do
   let(:category) { create(:category) }
   let(:book) { create(:book, category: category) }
 
+  #tests for average user
   describe 'as regular user' do
     before { login_as(user, scope: :user) }
     after { Warden.test_reset! }
@@ -24,6 +25,7 @@ RSpec.describe 'Books' do
 
   end
 
+  #tests for admin usage
   describe 'as admin' do
     before { login_as(admin, scope: :user) }
     after { Warden.test_reset! }
@@ -65,6 +67,7 @@ RSpec.describe 'Books' do
       end
     end
   end
+
 
   describe 'public features' do
     it 'filters books by title' do

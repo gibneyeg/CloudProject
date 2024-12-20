@@ -10,10 +10,11 @@ class Book < ApplicationRecord
   scope :available, -> { where(available: true) }
   scope :borrowed, -> { where(available: false) }
 
+  # defines searchable attributes 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title author category_id]
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    ['category'] end
+    ['category'] end # # Allows searching through the category association
 end

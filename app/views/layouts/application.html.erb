@@ -26,6 +26,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
+        #"browse & My borrowings link"
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item mx-2">
@@ -41,6 +42,7 @@
           </ul>
 
          <div class="d-flex align-items-center gap-3">
+         #if user signed in show email top right
   <% if user_signed_in? %>
     <div class="dropdown">
       <button class="btn btn-outline-primary rounded-pill dropdown-toggle" data-bs-toggle="dropdown">
@@ -64,6 +66,7 @@
       </div>
     </nav>
 
+    #any errors
     <% if flash.any? %>
       <div class="container mt-4">
         <% flash.each do |name, msg| %>

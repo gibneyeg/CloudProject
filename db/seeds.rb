@@ -1,4 +1,3 @@
-# Clear existing data
 puts 'Clearing existing data...'
 User.destroy_all
 Category.destroy_all
@@ -13,14 +12,12 @@ admin = User.create!(
 )
 puts 'Admin user created'
 
-# Create categories
 puts 'Creating categories...'
 categories = ['Fiction', 'Non-Fiction', 'Science', 'History', 'Technology'].map do |name|
   Category.create!(name: name)
 end
 puts 'Categories created!'
 
-# Create books
 puts 'Creating books...'
 20.times do |i|
   Book.create!(

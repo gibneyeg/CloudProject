@@ -18,6 +18,7 @@ class Category < ApplicationRecord
     books.count
   end
 
+  # defines which attributes can be searched/filtered
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at id name updated_at]
   end

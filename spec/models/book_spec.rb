@@ -49,6 +49,7 @@ RSpec.describe Book do
     end
   end
 
+  #tests for ransack
   describe 'searching' do
     describe '.ransackable_attributes' do
       it 'returns the allowed attributes for searching' do
@@ -70,6 +71,7 @@ RSpec.describe Book do
       end
     end
 
+    #tests for ransack
     describe 'search functionality' do
       let(:category) { create(:category, name: 'Fiction') }
       let(:ruby_book) { create(:book, title: 'Ruby Programming', author: 'John Doe', category: category) }

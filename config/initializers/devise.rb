@@ -1,4 +1,5 @@
 Devise.setup do |config|
+  # authentication system setup
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   
   require 'devise/orm/active_record'
