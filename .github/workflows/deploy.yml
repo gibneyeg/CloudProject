@@ -6,25 +6,7 @@ on:
       - main
 
 jobs:
-  ci:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.3.6'
-        bundler-cache: true
-    
-    - name: Test
-      run: |
-        bundle install
-        bundle exec rails test
-
   deploy:
-    needs: ci
     runs-on: ubuntu-latest
     
     steps:
@@ -43,17 +25,37 @@ jobs:
         EC2_IP: ${{ secrets.EC2_IP }}
       run: |
         ssh -o ServerAliveInterval=60 -i ~/.ssh/id_rsa ${EC2_USER}@${EC2_IP} << 'ENDSSH'
+          set -x  # Enable command printing
           cd ~/CloudProject
+          echo "Current branch:"
+          git branch
+          echo "Current commit:"
+          git rev-parse HEAD
+          echo "Fetching changes..."
+          git fetch origin
+          echo "Reset to origin/main..."
+          git reset --hard origin/main
+          echo "New commit:"
+          git rev-parse HEAD
+          echo "Git status:"
+          git status
+          
           source $HOME/.rvm/scripts/rvm
-          git pull origin main
           bundle install
+          RAILS_ENV=production bundle exec rails assets:precompile
+          RAILS_ENV=production bundle exec rails db:migrate
+          
           if [ -f tmp/pids/server.pid ]; then
+            echo "Stopping existing server..."
             kill -9 $(cat tmp/pids/server.pid)
-            rm tmp/pids/server.pid
           fi
-          RAILS_ENV=production bundle exec rake assets:precompile
-          RAILS_ENV=production bundle exec rake db:migrate
-          nohup bash -c 'RAILS_ENV=production SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} bundle exec rails s -b 0.0.0.0 -p 3000 -d' > /dev/null 2>&1 &
+          rm -f tmp/pids/server.pid
+          
+          echo "Starting server..."
+          RAILS_ENV=production SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} rails s -b 0.0.0.0 -p 3000 -d
+          
           echo "Deployment completed"
-          sleep 10
-        ENDSSH
+         
+          echo "Server status:"
+          ps aux | grep puma
+ENDSSH

@@ -7,13 +7,13 @@ config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   address:              'smtp.gmail.com',
   port:                 587,
-  domain:               '54.234.183.235',
+  domain:               '54.173.29.37',
   user_name:            'gibney.eg@gmail.com', 
   password:             'nzzm qbwv vbaz hdyb',      
   authentication:       'plain',
   enable_starttls_auto: true
 }
-config.action_mailer.default_url_options = { host: '54.234.183.235', port: 3000 }
+config.action_mailer.default_url_options = { host: '54.173.29.37', port: 3000 }
 
 config.public_file_server.enabled = true
 config.assets.compile = true
@@ -82,8 +82,8 @@ config.consider_all_requests_local = true
 config.force_ssl = false
 config.ssl_options = { hsts: false }
 config.action_controller.default_url_options = { protocol: 'http' }
-config.action_mailer.default_url_options = { protocol: 'http', host: '54.234.183.235' }
-config.hosts << "54.234.183.235"  # }
+config.action_mailer.default_url_options = { protocol: 'http', host: '54.173.29.37' }
+config.hosts << "54.173.29.37"  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
